@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   
   cities: Array<any> | undefined;
   posts: Array<any> | undefined;
+  city:any | undefined;
   
   state_arr : Array<any> = ["Andaman & Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
   changeState(count: any) {
@@ -88,10 +89,28 @@ print_city(city_id: string, city_index: number){
 		option_str.options[option_str.length] = new Option(city_arr[i],city_arr[i]);
 	}
 }
-
+ 
 assignCity(value:any){
+  this.city = value;
+  // const variables = {
+  //   searchTerm : value
+  // }
+  // axios.post('http://localhost:8080/api/bloodbanks/getBloodbanks',variables)
+  // .then((response:AxiosResponse)=>{
+  //   if (response.data.success) {
+  //     this.posts = response.data.products;
+  //     console.log(this.posts);
+  //   } else {
+  //     alert("Failed to get the data");
+  //   }
+      
+  // })
+}
+
+submit(){
+  console.log('called');
   const variables = {
-    searchTerm : value
+    searchTerm : this.city
   }
   axios.post('http://localhost:8080/api/bloodbanks/getBloodbanks',variables)
   .then((response:AxiosResponse)=>{
@@ -99,10 +118,11 @@ assignCity(value:any){
       this.posts = response.data.products;
       console.log(this.posts);
     } else {
-      alert("Failed to save the Image in Server");
+      alert("Failed to get the data");
     }
       
   })
+
 }
 
 
