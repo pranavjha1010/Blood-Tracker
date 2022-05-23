@@ -6,11 +6,12 @@ import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 
 @Component({
-  selector: 'app-donar-reistration',
-  templateUrl: './donar-reistration.component.html',
-  styleUrls: ['./donar-reistration.component.css']
+  selector: 'app-blood-request',
+  templateUrl: './blood-request.component.html',
+  styleUrls: ['./blood-request.component.css']
 })
-export class DonarReistrationComponent implements OnInit {
+export class BloodRequestComponent implements OnInit {
+
   registerForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.email, Validators.required]),
@@ -19,20 +20,27 @@ export class DonarReistrationComponent implements OnInit {
     age: new FormControl(null, [Validators.required]),
     state: new FormControl(null, [Validators.required]),
     city: new FormControl(null, [Validators.required]),
-    bloodBank: new FormControl(null, [Validators.required]),
-    bloodGroup: new FormControl(null, [Validators.required]),
-    aadharNumber: new FormControl(null, [Validators.required]),
+    // bloodGroup: new FormControl(null, [Validators.required]),
+    // aadharNumber: new FormControl(null, [Validators.required]),
     address: new FormControl(null),
-    date: new FormControl(null)
+    date: new FormControl(null),
+    priority: new FormControl(null),
   })
   cities: Array<any> | undefined;
   posts: Array<any> | undefined;
   bloodBank: any | undefined;
+  priority_arr: Array<any> = ["low", "high", "urgent"]
+  state_arr: Array<any> = ["Andaman & Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
+  // fileToUpload: File | null = null;
+  // onFileSelected(event: any) {
+  //   this.fileToUpload = event.target.files[0];
+  // }
+  // onUpload() {
 
+  // }
   uploader: FileUploader = new FileUploader({ url: "api/your_upload", removeAfterUpload: false, autoUpload: true });
 
 
-  state_arr: Array<any> = ["Andaman & Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal"];
   changeState(count: any) {
     //console.log(count);
     var index = this.state_arr.indexOf(count);
@@ -122,10 +130,9 @@ export class DonarReistrationComponent implements OnInit {
   }
 
 
-
-
   constructor(private _router: Router) { }
   register() {
+    console.log(this.registerForm);
     if (!this.registerForm.valid) {
       alert('Invalid Details');
       return;
@@ -133,22 +140,19 @@ export class DonarReistrationComponent implements OnInit {
     const variables = {
       Name: this.registerForm.controls.name.value,
       email: this.registerForm.controls.email.value,
-      BloodBank: this.bloodBank,
       PhoneNumber: this.registerForm.controls.phoneNumber.value,
       Gender: this.registerForm.controls.gender.value,
       Age: this.registerForm.controls.age.value,
       State: this.registerForm.controls.state.value,
       City: this.registerForm.controls.city.value,
-      BloodGroup: this.registerForm.controls.bloodGroup.value,
-      AadharNumber: this.registerForm.controls.aadharNumber.value,
       Address: this.registerForm.controls.address.value,
-      DateOfDonation: this.registerForm.controls.date.value
+      DateOfDonation: this.registerForm.controls.date.value,
+      Priority: this.registerForm.controls.priority.value,
     }
     //console.log(variables)
     axios.post('http://localhost:8080/api/donars/donarRegistration', variables)
       .then((response: AxiosResponse) => {
         if (response.data.success) {
-
           alert("Registered successfully");
           this._router.navigate(['/']);
         } else {

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const donarCampSchema = mongoose.Schema(
   {
-    NameOfOrganzation: {
+    NameOfCamp: {
       type: String,
       maxlength: 50,
     },
@@ -44,6 +44,19 @@ const donarCampSchema = mongoose.Schema(
     },
   },
   { timestamps: true }
+);
+
+donarCampSchema.index(
+  {
+    NameOfCamp: "text",
+    CampHeldAt: "text",
+  },
+  {
+    weights: {
+      NameOfCamp: 5,
+      CampHeldAt: 2,
+    },
+  }
 );
 
 const DonarCamp = mongoose.model("DonarCamp", donarCampSchema);
