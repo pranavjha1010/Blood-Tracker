@@ -8,12 +8,12 @@
 <main class="content">
     <div class="container-fluid p-0" style="margin-left: 25%;
     margin-right:25%;">
-        <h1 class="h3 mb-3" style="color: red;">Donar Registration</h1>
+        <h1 class="h3 mb-3" style="color: red;">Blood Request Form</h1>
         <div class="row">
             <div class="col-md-12">
                 <div class="card" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);width: 60%;">
                     <div class="card-header">
-                        <h5 class="card-title" style="font-size: large; ">Donar Details</h5>
+                        <h5 class="card-title" style="font-size: large; ">Request Details</h5>
                     </div>
                     <div class="card-body">
                         <form [formGroup]="registerForm">
@@ -55,30 +55,22 @@
                                         <option *ngFor ="let city of cities">{{city}} </option>
                                     </select>
                                 </div>
-                                <!-- <div class="form-group col-md-4">
-                                    <label for="bloodBank">Blood Bank</label>
-                                    <select formControlName="bloodBank" type="text" class="form-control" id="bloodBank" name="bloodBank" placeholder="Blood Bank" (change)="assignBloodBank($any($event.target).value)" required>
-                                        <option *ngFor ="let post of posts">{{post.Name}} </option>
+                                <div class="form-group col-md-4">
+                                    <label for="priority">Priority</label>
+                                    <select formControlName="priority" type="text" class="form-control" id="priority" name="priority" placeholder="Priority" required>
+                                        <option *ngFor ="let level of priority_arr">{{level}} </option>
                                     </select>
-                                </div> -->
-                                <div class="form-group col-md-4">
-                                    <label for="fileUpload">Upload Medical History</label>
-                                    <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="date">Tentative Date</label>
-                                    <input formControlName="date" type="date" class="form-control" id="date" name="date" placeholder="Date" required/>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="bloodGroup">Blood group</label>
-                                    <input formControlName="bloodGroup" type="text" class="form-control" id="bloodGroup" name="bloodGroup" placeholder="Blood Group" required/>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="aadharNumber">Aadhar Number</label>
-                                    <input formControlName="aadharNumber" type="aadharNumber" class="form-control" id="aadharNumber" name="aadharNumber" placeholder="Aadhar Number" required/>
+                                    <label for="bloodGroup">Reason For The Request</label>
+                                    <textarea formControlName="bloodGroup" type="text" class="form-control" id="reason" name="Reason" placeholder="Reason" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="file">Choose Prescription</label><br/>
+                                <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+                            </div>
+                            <div >
                                 <label class="custom-control custom-checkbox m-0">
                                     <input type="checkbox" class="custom-control-input" required />
                                     <p class="custom-control-label">I agree to the Terms and Conditions and Privacy Policy</p>

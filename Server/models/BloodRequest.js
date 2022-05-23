@@ -6,7 +6,7 @@ const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 
-const donarregistrationSchema = mongoose.Schema(
+const bloodRequestSchema = mongoose.Schema(
   {
     Name: {
       type: String,
@@ -34,34 +34,22 @@ const donarregistrationSchema = mongoose.Schema(
       type: Number,
       length: 10,
     },
-
-    BloodGroup: {
+    ReasonForBloodRequirement: {
       type: String,
     },
     Address: {
       type: String,
     },
-
-    AadhaarNumber: {
-      type: Number,
-      length: 12,
-    },
-    DateOfDonation: {
-      type: Date,
-    },
-    BloodBank: {
+    Hospital: {
       type: String,
     },
-    BloodCamp: {
+    Recommendation: {
       type: String,
     },
   },
   { timestamps: true }
 );
 
-const DonarRegistration = mongoose.model(
-  "DonarRegistration",
-  donarregistrationSchema
-);
+const BloodRequest = mongoose.model("BloodRequest", bloodRequestSchema);
 
-module.exports = { DonarRegistration };
+module.exports = { BloodRequest };
